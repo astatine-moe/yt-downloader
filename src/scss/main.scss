@@ -1,0 +1,110 @@
+@import 'base/variables', 'base/fonts';
+@import 'components/fomantic', 'components/icons', 'components/update', 'components/titlebar';
+*,
+*::after,
+*::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+
+@import 'components/navbar', 'components/appify';
+
+html,
+body {
+    color: $primary-fg;
+    background: $primary-bg;
+    font-family: 'Montserrat', sans-serif !important;
+
+    height: 100%;
+    width: 100%;
+
+    user-select: none;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Montserrat', sans-serif !important;
+}
+main {
+    margin-left: 15vh;
+    margin-right: 5vh;
+    margin-top: 2vh;
+
+    @media only screen and (max-width: 600px) {
+        margin: 2vh;
+        margin-bottom: 10vh;
+    }
+
+    a {
+        text-decoration: none;
+        color: $nav-fg-hover;
+        transition: color 250ms ease;
+
+        &:hover {
+            color: lighten($nav-fg-hover, 20);
+        }
+    }
+}
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center {
+    width: 800px;
+}
+hr {
+    border: 0;
+    border-bottom: 1px dashed #464b53;
+}
+.ui.selection.dropdown {
+    color: white;
+}
+.input i {
+    color: white;
+    font-size: 20px;
+}
+.success-box {
+    border: 1px solid green !important;
+}
+.error-box {
+    border: 1px solid red !important;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $secondary-bg;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+    color: $secondary-fg;
+}
+.ui.card {
+    background: $secondary-bg;
+}

@@ -1,12 +1,177 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>YouTube downloader</title>
+
+        <link rel="stylesheet" href="css/app.min.css">
+    </head>
+    <body>
+        <div id="loader" style="display:none;">
+            <div class="ui active dimmer">
+                <div class="ui active green elastic loader massive"></div>
+            </div>
+        </div>
+        <nav style="display:none;">
+            <ul>
+                <li data-id="home">
+                    <a href="#", class="nav-link active">
+                        <div class="icon">
+                            <i class="mdi mdi-youtube"></i>
+                        </div>
+                        <div class="nav-text">
+                            <span>Downloader</span>
+                        </div>
+                    </a>
+                </li>
+                <li data-id="info">
+                    <a href="#", class="nav-link">
+                        <div class="icon">
+                            <i class="mdi mdi-help-circle"></i>
+                        </div>
+                        <div class="nav-text">
+                            <span>Info</span>
+                        </div>
+                    </a>
+                </li>
+                <li data-id="settings">
+                    <a href="#", class="nav-link">
+                        <div class="icon">
+                            <i class="mdi mdi-cog"></i>
+                        </div>
+                        <div class="nav-text">
+                            <span>Settings</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div id="content" style="display:none;">
+            
+            <div class="page" id="home">
+                <div style="width:100%;padding-left:15vh;padding-right:6vh;padding-top:5vh;">
+                    <div style="text-align: center;">
+                        <h1>YouTube downloader</h1>
+                        <p>Queue status: <span class="ui text red" id="queuePing">booting...</span></p>
+                        <hr>
+                        <br>
+                        <div class="ui action input fluid">
+                            <input type="text" placeholder="YouTube URL", id="youtubeUrl">
+                            <select class="ui compact selection dropdown", id="format">
+                                <optgroup label="AUDIO">
+                                    <option value="mp3">.MP3</option>
+                                    <option value="wav">.WAV</option>
+                                    <option value="m4a">.M4A</option>
+                                    <option value="flac">.FLAC</option>
+                                    <option value="ogg">.OGG</option>
+                                </optgroup>
+                                <optgroup label="VIDEO">
+                                    <option value="mp4">.MP4</option>
+                                    <option value="mkv">.MKV</option>
+                                </optgroup>
+                            </select> 
+                            <select class="ui compact selection dropdown", id="quality">
+                                <option value="highest">Highest quality</option>
+                                <option value="lowest">Lowest quality</option>
+                            </select>
+                            <div class="ui button" id="youtubeDL">Download</div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <h1>Queue</h1>
+                    <hr>
+                    <br>
+                    <div class="queue"></div>
+                </div>
+            </div>
+            <div class="page" id="info" style="display:none;">
+                <div style="width:100%;padding-left:15vh;padding-right:6vh;padding-top:5vh;">
+                    <div style="text-align: center;">
+                        <h1>Info</h1>
+                        <hr>
+                        <br>
+                    </div>
+                    <div class="ui styled accordion fluid">
+                        <div class="active title">
+                            <i class="dropdown icon"></i>
+                            <i class="mdi mdi-security"></i>
+                            Security
+                        </div>
+                        <div class="active content">
+                            <h5>No adverts</h5>
+                            <p>This program will never have adverts, no matter what</p>
+                            <h5>No unnecessary features</h5>
+                            <p>Program does what it says, nothing else.</p>
+                        </div>
+                        <div class="title">
+                            <i class="dropdown icon"></i>
+                            <i class="mdi mdi-file-video"></i>
+                            Videos
+                        </div>
+                        <div class="content">
+                            <h5>Downloading videos</h5>
+							<p>To download a video, simply put a valid YouTube video URL into the text box, and press 'download'. It will then add that video to a queue and download it to your specified download folder</p>
+                        </div>
+                        <div class="title">
+                            <i class="dropdown icon"></i>
+                            <i class="mdi mdi-playlist-play"></i>
+                            Playlists
+                        </div>
+                        <div class="content">
+                            <h5>Downloading playlists</h5>
+                            <p>Downloading playlists is currently not available, it will be available in a future update</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="settings" style="display:none;">
+                <div style="width:100%;padding-left:15vh;padding-right:6vh;padding-top:5vh;">
+                    <div style="text-align: center;">
+                        <h1>Settings</h1>
+                        <hr>
+                        <br>
+                    </div>
+                    <h5>Download folder</h5>
+                    <button class="ui button red" id="changeFolder">
+                        <i class="mdi mdi-folder">
+                        Select folder
+                    </button>
+                    <i id="currentFolder">loading...</i>
+                </div>
+            </div>
+        </div>
+        <div class="update" style="display:none;">
+            <p>An update is downloading in the background...</p>
+            <div class="ui tiny yellow swinging indeterminate progress">
+                <div class="bar"></div>
+            </div>
+        </div>
+        <div class="changelog">
+            <button class="ui icon red circular button" id="changelogBtn">
+                <i class="icon mdi mdi-notebook"></i>
+            </button>
+        </div>
+        <div class="ui modal" id="changelog">
+            <i class="mdi mdi-close close"></i>
+            <div class="header">Changelog</div>
+            <div class="content">
+                <h4>v0.0.2 (Current)</h4>
+                <ul>
+                    <li>Updated design</li>
+                    <li>Optimised queue</li>
+                    <li>Added an ability to change the quality of the output</li>
+                </ul>
+                <h4>v0.0.1 (Current)</h4>
+                <ul>
+                    <li>Initial commit</li>
+                </ul>
+            </div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/semantic.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

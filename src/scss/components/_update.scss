@@ -1,0 +1,22 @@
+.update {
+    position: fixed;
+    right: 1vw;
+    bottom: 1vw;
+    width: 25%;
+}
+.changelog {
+    position: fixed;
+    right: 1vw;
+    top: 1vw;
+}
+.ui.modal {
+    background: $secondary-bg;
+}
+.ui.modal > .header {
+    background: $secondary-bg;
+    color: white;
+    border-bottom: 1px solid lighten($secondary-bg, 25%);
+}
+.ui.modal > .content {
+    background: lighten($secondary-bg, 5%);
+}

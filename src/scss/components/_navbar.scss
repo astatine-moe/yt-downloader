@@ -1,0 +1,133 @@
+a.nav-link {
+    cursor: pointer !important;
+}
+nav {
+    z-index: 10;
+    color: $nav-fg;
+    background: $nav-bg;
+
+    overflow: hidden;
+
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 10vh;
+
+    transition: width 250ms ease;
+
+    //pseudo classes
+    // &:hover {
+    //     width: 30vh;
+
+    //     ul li .nav-link .nav-text {
+    //         display: block;
+    //     }
+    // }
+
+    //media query
+    @media only screen and (max-width: 600px) {
+        bottom: 0;
+        width: 100%;
+        height: 8vh;
+
+        &:hover {
+            width: 100%;
+
+            ul li .nav-link .nav-text {
+                display: none;
+            }
+        }
+    }
+
+    &.dashboard {
+        bottom: 0;
+        width: 100%;
+        height: 8vh;
+        ul {
+            flex-direction: row;
+        }
+    }
+
+    //children
+    ul {
+        list-style: none;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+
+        //media query
+        @media only screen and (max-width: 600px) {
+            flex-direction: row;
+        }
+
+        li {
+            width: 100%;
+            white-space: nowrap;
+
+            @media only screen and (min-width: 600px) {
+                &:last-child {
+                }
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                height: 8vh;
+                color: $nav-fg;
+
+                text-decoration: none;
+
+                transition: color 250ms ease;
+
+                &.active,
+                &:hover {
+                    color: $nav-fg-hover;
+                }
+
+                //media query
+                @media only screen and (max-width: 600px) {
+                    justify-content: center;
+                }
+
+                .nav-text {
+                    font-size: 2vh;
+                    display: none;
+                    margin-left: 0.5vw;
+                    margin: 0 2.1vh;
+                }
+
+                .icon {
+                    font-size: 5.5vh;
+                    min-width: 6vh;
+                    margin: 0 2.1vh;
+
+                    img {
+                        width: 5.5vh;
+                        height: auto;
+                        border-radius: 50%;
+                        border: 1px solid white;
+                    }
+
+                    //media query
+                    @media only screen and (max-width: 600px) {
+                        font-size: 3vh;
+                        min-width: 3vw;
+                        margin: 0 1.1vw;
+                    }
+                }
+            }
+        }
+    }
+}
+.ui.styled.accordion .active.title {
+    color: $nav-fg-hover;
+}
+.ui.styled.accordion,
+.ui.styled.accordion .accordion {
+    background: $secondary-bg;
+}
